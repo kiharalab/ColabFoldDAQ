@@ -1314,7 +1314,7 @@ def run(
         )
 
         try:
-            if a3m_lines is not None:
+            if a3m_lines is not None: #Custom MSAs
                 (
                     unpaired_msa,
                     paired_msa,
@@ -1322,6 +1322,24 @@ def run(
                     query_seqs_cardinality,
                     template_features,
                 ) = unserialize_msa(a3m_lines, query_sequence)
+                #Custom template and Custom MSA
+                if use_templates:
+                     (
+                        fake_unpaired_msa,
+                        fake_paired_msa,
+                        fake_query_seqs_unique,
+                        fake_query_seqs_cardinality,
+                        template_features,#Update
+                    ) = get_msa_and_templates(
+                        jobname,
+                        query_sequence,
+                        result_dir,
+                        msa_mode,
+                        use_templates,
+                        custom_template_path,
+                        pair_mode,
+                        host_url,
+                    )
             else:
                 (
                     unpaired_msa,
